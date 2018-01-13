@@ -1,0 +1,62 @@
+(1)html-webpack-plugin插件是用来生成html文件的，有很灵活的配置项，下面是基本的一些用法
+plugins: [
+    new HtmlWebpackPlugin(), // Generates default index.html
+    new HtmlWebpackPlugin({  // Also generate a test.html
+      filename: 'test.html', // 生成的文件的名称
+      title: 'Custom template', // 文件的标题
+      template: 'my-index.ejs' //可以指定模块html文件
+    })
+]
+下面是模板文件my-index.ejs的内容
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title> //这里使用特殊的表示插入配置项的title
+  </head>
+  <body>
+  </body>
+</html>
+(2)friendly-errors-webpack-plugin插件，把webpack编译出来的错误展示给我们，方便调试
+   安装 npm install friendly-errors-webpack-plugin --save-dev
+   基本使用
+   plugins: [
+       new FriendlyErrorsWebpackPlugin(),
+   ]
+   注意点，使用这个插件要遵守下点
+       您需要关闭所有的错误日志记录，将webpack配置静默选项设置为true
+       也就是遵循以下三点即可
+       在使用webpack-dev-middleware插件，关于这个插件的解释在我的dev-sever-js配置文件中有解释，设置以下内容
+        app.use(require('webpack-dev-middleware')(compiler, {
+            quiet: true, // 必须设置
+            publicPath: config.output.publicPath,
+        }));
+       使用webpack-dev-server时设置如下
+       {
+           devServer: {
+               quiet: true
+           }
+       }
+       使用webpack-hot-middleware中间件，关于这个插件的解释也在我的dev-server-js文章中
+        app.use(require('webpack-hot-middleware')(compiler, {
+            log: () => {}
+        }));
+    做到以上几点，就可以正常使用这个插件了，这个插件还有一些配置项，感兴趣自行了解
+(3) HotModuleReplacementPlugin解释如下
+    老哥们知道什么是webpack模块不
+    webpack支持如下模块
+        CoffeeScript
+        TypeScript
+        ESNext (Babel)
+        Sass
+        Less
+        Stylus
+    这些模块支持如下导入的方式
+        ES2015 import 语句
+        CommonJS require() 语句
+        AMD define 和 require 语句
+        css/sass/less 文件中的 @import 语句。
+        样式(url(...))或 HTML 文件(<img src=...>)中的图片链接(image url)
+    看到了把，webpack就是这么强大，几乎囊括了前端所有的东西
+    这个插件的作用就是当你的程序在运行时，而你现在要替换、添加或删除某个模块，又不想重新加载页面，
+    这个插件帮助你实现无刷新加载，关于内部实现原理，其实有点意思，各位请自行查看
