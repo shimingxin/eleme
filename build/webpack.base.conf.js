@@ -49,7 +49,8 @@ module.exports = {//基本配置
       'vue$': 'vue/dist/vue.esm.js',
       // resolve('src') 其实在这里就是项目根目录中的src目录，使用 import somejs from "@/some.js" 就可以导入指定文件，是不是很高大上
       '@': resolve('src'),
-      'components': resolve('../src/components')
+      'common': path.resolve(__dirname,'../src/common'),
+      'components': path.resolve(__dirname,'../src/components')
     }
   },
   // module用来解析不同的模块
