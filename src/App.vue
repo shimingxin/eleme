@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <!--全局定一个特殊的class border-1px 实现1px在不同设备上的缩放 在base.styl-->
       <div class="tab-item">
@@ -19,7 +19,8 @@
 
 <script>
   import header from 'components/header/header.vue';
-  const ERR_OK=0;
+
+  const ERR_OK = 0;
   export default {
     data () {
       return {
@@ -29,8 +30,8 @@
     created () {
       this.$http.get('/api/seller').then(response => {
         response = response.body;
-        if(response.errno===ERR_OK){
-          this.seller=response.data;
+        if (response.errno === ERR_OK) {
+          this.seller = response.data;
         }
       }, response => {
         console.log('无数据');
@@ -38,9 +39,8 @@
     },
     components: {
       'v-header': header
-    },
-  }
-  ;
+    }
+  };
 </script>
 
 <style lang="stylus" ref="stylesheet/stylus">
