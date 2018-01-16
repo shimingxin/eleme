@@ -8,7 +8,8 @@ border-1px($color)//给css定义一个特殊的方法
     width: 100%
     border-top: 1px solid $color
     content: ' '
-bg-image($url)
+bg-image($url)//图片适应不同的dpr
   background-image :url($url+"@2x.png")
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
     background-image :url($url+"@3x.png")
+icon-image()
