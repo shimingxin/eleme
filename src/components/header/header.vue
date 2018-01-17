@@ -27,9 +27,19 @@
       <i class="icon-keyboard_arrow_right"></i>
     </div>
     <div class="background">
-      <img :src="seller.avatar" width=100%         height=100%>
+      <img :src="seller.avatar" width=100%             height=100%>
     </div>
-    <div v-show="detailShow" class="detail"></div>
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix">
+        <div class="detail-main">
+          <p class="name">{{seller.name}}</p>
+
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close" @click="closeDetail()"></i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,9 +58,12 @@
     created () {
       this.iconMap = ['decrease', 'disconnect', 'special', 'invoice', 'guarantee'];
     },
-    methods:{
-      showDetail(){
-        this.detailShow=true;
+    methods: {
+      showDetail () {
+        this.detailShow = true;
+      },
+      closeDetail () {
+        this.detailShow = false;
       }
     }
   };
@@ -179,4 +192,23 @@
       overflow: auto
       background-color: rgba(7, 17, 27, 0.8)
       blur: 10px
+      .detail-wrapper
+        min-height: 100%
+        width: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+          .name
+            line-height: 16px
+            font-size: 16px
+            font-weight: 700
+            text-align :center
+      .detail-close
+        position: relative
+        height: 32px
+        width: 32px
+        margin: -64px auto 0 auto
+        clear: both
+        font-size: 32px
+
 </style>
