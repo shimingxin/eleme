@@ -106,11 +106,11 @@
         .food-item
           display: flex
           margin: 18px
-          padding-bottom :18px
+          padding-bottom: 18px
           border-1px(rgba(7, 17, 27, 0.1))
           &:last-child
             border-none()
-            margin-bottom :0
+            margin-bottom: 0
           .icon
             flex: 0 0 57px
             padding-right: 10px
@@ -118,14 +118,33 @@
             flex: 1
             .name
               font-size: 14px
+              height :14px
               line-height: 14px
               color: rgb(7, 17, 27)
               padding-top: 2px
             .desc
-              display :block
               font-size: 10px
               line-height: 10px
               color: rgb(147, 153, 159)
-              padding :8px auto
+              margin: 8px auto
+            .extra
+              font-size: 10px
+              height :10px
+              line-height: 10px
+              color: rgb(147, 153, 159)
+              &:first-child
+                margin-right: 12px
+            .price
+              font-weight :700
+              .new-price
+                font-size :14px
+                color :rgb(240,20,20)
+                line-height :24px
+                margin-right :8px
+              .old-price
+                font-size :10px
+                color :rgb(147, 153, 159)
+                line-height :24px
+                text-decoration :line-through
 
 </style>
