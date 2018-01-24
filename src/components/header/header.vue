@@ -226,7 +226,7 @@
           .name
             line-height: 16px
             font-size: 16px
-            font-weight: 700
+            font-weight: bold
             text-align: center
           .star-wrapper
             margin-top: 16px
@@ -244,7 +244,7 @@
             .text
               padding: 0 12px
               font-size: 14px
-              font-weight: 700
+              font-weight: bold
           .supports
             width: 80%
             margin: 0 auto

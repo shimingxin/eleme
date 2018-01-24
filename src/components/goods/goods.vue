@@ -29,18 +29,25 @@
                   <span class="new-price">¥{{food.price}}</span><span v-show="food.oldPrice"
                                                                       class="old-price">¥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"
+              :selected-foods="selectedFoods"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import icon from 'components/icon/icon';
   import BScroll from 'better-scroll';
+  import shopcart from 'components/shopcart/shopcart';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
 
   const ERR_OK = 0;
   export default {
@@ -51,7 +58,7 @@
     },
     data () {
       return {
-        goods: {},
+        goods: [],
         listHeight: [],
         scrollY: 0
       };
@@ -68,6 +75,17 @@
           }
         }
         return 0;
+      },
+      selectedFoods () {
+        let foodsList = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count > 0) {
+              foodsList.push(food);
+            }
+          });
+        });
+        return foodsList;
       }
     },
     created () {
@@ -91,7 +109,9 @@
       });
     },
     components: {
-      'v-icon': icon
+      'v-icon': icon,
+      shopcart,
+      cartcontrol
     },
     methods: {
       _initScroll () {
@@ -100,7 +120,8 @@
 
         });
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
-          probeType: 3 // 监控滚动的位置
+          probeType: 3, // 监控滚动的位置
+          click: true
         });
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y));
@@ -156,8 +177,9 @@
           z-index: 10
           margin-top: -1px
           background-color: white
-          font-weight: 700
           border-none()
+          .text
+            font-weight: bold
     .foods-wrapper
       flex: 1
       .food-list
@@ -201,16 +223,23 @@
               .count
                 margin-right: 12px
             .price
-              font-weight: 700
               .new-price
                 font-size: 14px
+                font-weight: bold
                 color: rgb(240, 20, 20)
                 line-height: 24px
                 margin-right: 8px
               .old-price
                 font-size: 10px
+                font-weight: bold
                 color: rgb(147, 153, 159)
                 line-height: 24px
                 text-decoration: line-through
+            .cartcontrol-wrapper
+              position: absolute
+              bottom: 6px
+              right: 0
+              height: 36px
+
 
 </style>

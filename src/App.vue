@@ -13,7 +13,7 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
@@ -62,6 +62,7 @@
         color: rgb(77, 85, 93)
         &.active
           color: rgb(240, 20, 20)
+
   /*text-decoration none*/
 
 </style>
